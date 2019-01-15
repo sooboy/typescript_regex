@@ -25,6 +25,7 @@ const matchOneChar =(pattern:string,char:string):boolean=>{
  */
 const match =(pattern:string,text:string):boolean=>{
     if (pattern === "") return true;
+    if (pattern === "$"&& text==="") return true;
     if (!text) return false;
     return matchOneChar(pattern[0],text[0]) &&match(pattern.slice(1),text.slice(1));
 }

@@ -35,4 +35,7 @@ describe("匹配多个字符",()=>{
         expect(match('aa','aab')).toBe(true);
         // expect(match('aa','baab')).toBe(true);
     })
+    it("匹配 $ 结尾的字符",()=>{
+        expect(match("aaaa$","aaaa")).toBe(true);
+    })
 })
