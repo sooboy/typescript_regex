@@ -9,7 +9,7 @@
  * case 4 : matchOneChar('a','b')->false
  * case 5 : matchOneChar('a','a')->true  
  * 
- * 单个字符匹配有以上5情况
+ * 单个字符匹配有以上情况
  */
 const matchOneChar =(pattern:string,char:string):boolean=>{
     if(!pattern) return true;   //case 1
@@ -27,6 +27,7 @@ const match =(pattern:string,text:string):boolean=>{
     if (pattern === "") return true;
     if (pattern === "$"&& text==="") return true;
     if (!text) return false;
+    if (pattern[0] === '^') return match(pattern.slice(1),text);
     return matchOneChar(pattern[0],text[0]) &&match(pattern.slice(1),text.slice(1));
 }
 

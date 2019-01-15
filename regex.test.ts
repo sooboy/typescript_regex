@@ -38,4 +38,9 @@ describe("匹配多个字符",()=>{
     it("匹配 $ 结尾的字符",()=>{
         expect(match("aaaa$","aaaa")).toBe(true);
     })
+    it("匹配 ^ 匹配符",()=>{
+        expect(match("^aaa","aaa")).toBe(true);
+        expect(match("^aa","aaa")).toBe(true);
+        expect(match("^aa","baaa")).toBe(false);
+    })
 })
