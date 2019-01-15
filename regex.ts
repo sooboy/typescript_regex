@@ -27,11 +27,27 @@ const match =(pattern:string,text:string):boolean=>{
     if (pattern === "") return true;
     if (pattern === "$"&& text==="") return true;
     if (!text) return false;
-    if (pattern[0] === '^') return match(pattern.slice(1),text);
+    // if (pattern[0] === '^') return match(pattern.slice(1),text);
+    if (pattern[1] === '?'){
+        return matchOneChar(pattern[0],text[0])&&match(pattern.slice(2),text.slice(1))  || match(pattern.slice(2),text);
+    }
+    if (pattern[1] === '*'){
+        return matchOneChar(pattern[0],text[0])&&match(pattern,text.slice(1))  || match(pattern.slice(2),text);
+    }
+
     return matchOneChar(pattern[0],text[0]) &&match(pattern.slice(1),text.slice(1));
+}
+
+const search =(pattern:string,text:string):boolean=>{
+    if (pattern[0] === '^') {
+        return match(pattern.slice(1), text);
+      } else {
+        return match('.*' + pattern, text);
+      }
 }
 
 export{
     matchOneChar,
-    match
+    match,
+    search
 }
