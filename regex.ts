@@ -22,6 +22,8 @@ const matchOneChar =(pattern:string,char:string):boolean=>{
  * 
  * @param pattern 匹配字符
  * @param text    匹配文本
+ * 
+ * 
  */
 const match =(pattern:string,text:string):boolean=>{
     if (pattern === "") return true;
@@ -37,7 +39,12 @@ const match =(pattern:string,text:string):boolean=>{
 
     return matchOneChar(pattern[0],text[0]) &&match(pattern.slice(1),text.slice(1));
 }
-
+/**
+ * 头部不对齐情况，可以通过转换匹配符或是匹配文本转换成头部对齐情况
+ * @param pattern 
+ * @param text 
+ */
+// 方案一
 const search =(pattern:string,text:string):boolean=>{
     if (pattern[0] === '^') {
         return match(pattern.slice(1), text);
@@ -45,6 +52,17 @@ const search =(pattern:string,text:string):boolean=>{
         return match('.*' + pattern, text);
       }
 }
+
+// 方案二
+// const search =(pattern:string,text:string):boolean=>{
+//     if (pattern[0] === '^') {
+//         return match(pattern.slice(1), text);
+//       } else {
+//         return text.split('').some((_, index) => {
+//             return match(pattern, text.slice(index));
+//           });
+//       }
+// }
 
 export{
     matchOneChar,
